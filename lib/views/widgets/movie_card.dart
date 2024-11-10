@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app/models/movie_model.dart';
 
+
 class MovieCardWidget extends StatelessWidget {
  
-  Future<List<Movie>> series;
+  final Future<List<Movie>> series;
   
   final String headLineText;
 
-   MovieCardWidget({super.key, required this.series, required this.headLineText,});
+   const MovieCardWidget({super.key, required this.series, required this.headLineText,});
 
   @override
   Widget build(BuildContext context) {

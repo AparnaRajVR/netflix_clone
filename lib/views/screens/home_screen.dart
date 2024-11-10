@@ -1,10 +1,9 @@
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:netflix_app/constants/utils.dart';
 import 'package:netflix_app/controllers.dart/api_services.dart';
 import 'package:netflix_app/models/movie_model.dart';
+import 'package:netflix_app/views/screens/search_screen.dart';
 import 'package:netflix_app/views/widgets/carousel_widget.dart';
 // import 'package:netflix_app/views/widgets/carousel_widget.dart';
 import 'package:netflix_app/views/widgets/movie_card.dart';
@@ -59,7 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 20.0),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>const SearchScreen()));
+              },
               child: const Icon(
                 Icons.search,
                 size: 30,
@@ -82,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
               SizedBox(
-              height: 250,
+              height: MediaQuery.of(context).size.height * 0.5625,
               child: CustomCarouselSlider(
               series: carousel,
               ),

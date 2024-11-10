@@ -1,12 +1,12 @@
 
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:netflix_app/controllers.dart/api_services.dart';
 import 'package:netflix_app/models/movie_model.dart';
 import 'dart:async';
+
+import 'package:netflix_app/views/screens/movie_details.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -70,42 +70,94 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildMovieListItem(Movie movie) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Row(
-        children: [
-          
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: SizedBox(
-              width: 100,
-              height: 150,
-              child: CachedNetworkImage(
-                imageUrl: "https://image.tmdb.org/t/p/w500${movie.posterPath}",
-                fit: BoxFit.cover,
-                errorWidget: (context, url, error) => Container(
-                  color: Colors.grey[800],
-                  child: const Icon(Icons.error, color: Colors.white),
-                ),
-                placeholder: (context, url) => Container(
-                  color: Colors.grey[800],
-                  child: const Center(
-                    child: CircularProgressIndicator(color: Colors.white),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MovieDetailsPage(movieId: movie.id),
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: SizedBox(
+                width: 100,
+                height: 150,
+                child: CachedNetworkImage(
+                  imageUrl: "https://image.tmdb.org/t/p/w500${movie.posterPath}",
+                  fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => Container(
+                    color: Colors.grey[800],
+                    child: const Icon(Icons.error, color: Colors.white),
+                  ),
+                  placeholder: (context, url) => Container(
+                    color: Colors.grey[800],
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(width: 16),
-          // Movie Title
-          Expanded(
-            child: Text(
-              movie.title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Text(
+                movie.title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMovieCard(Movie movie) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MovieDetailsPage(movieId: movie.id),
+          ),
+        );
+      },
+      child: Column(
+        children: [
+          Expanded(
+            child: CachedNetworkImage(
+              imageUrl: "https://image.tmdb.org/t/p/w500${movie.posterPath}",
+              fit: BoxFit.cover,
+              errorWidget: (context, url, error) => Container(
+                color: Colors.grey[800],
+                child: const Icon(Icons.error, color: Colors.white),
+              ),
+              placeholder: (context, url) => Container(
+                color: Colors.grey[800],
+                child: const Center(
+                  child: CircularProgressIndicator(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            movie.title,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
             ),
           ),
         ],
@@ -135,40 +187,6 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       itemCount: movies.length,
       itemBuilder: (context, index) => _buildMovieCard(movies[index]),
-    );
-  }
-
-  Widget _buildMovieCard(Movie movie) {
-    return Column(
-      children: [
-        Expanded(
-          child: CachedNetworkImage(
-            imageUrl: "https://image.tmdb.org/t/p/w500${movie.posterPath}",
-            fit: BoxFit.cover,
-            errorWidget: (context, url, error) => Container(
-              color: Colors.grey[800],
-              child: const Icon(Icons.error, color: Colors.white),
-            ),
-            placeholder: (context, url) => Container(
-              color: Colors.grey[800],
-              child: const Center(
-                child: CircularProgressIndicator(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          movie.title,
-          textAlign: TextAlign.center,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-          ),
-        ),
-      ],
     );
   }
 

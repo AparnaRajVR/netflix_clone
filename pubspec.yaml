@@ -39,6 +39,7 @@ flutter:
   assets:
    - assets/image.png
    - assets/logo.png
+   - assets/netflix.json
   #   - images/a_dot_ham.jpeg
      
 
