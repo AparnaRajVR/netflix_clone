@@ -5,7 +5,7 @@ import 'package:netflix_app/controllers.dart/api_services.dart';
 import 'package:netflix_app/models/movie_model.dart';
 import 'package:netflix_app/views/screens/search_screen.dart';
 import 'package:netflix_app/views/widgets/carousel_widget.dart';
-// import 'package:netflix_app/views/widgets/carousel_widget.dart';
+
 import 'package:netflix_app/views/widgets/movie_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Movie>> movies;
   late Future<List<Movie>>carousel;
 
-  /////series//////
+ 
 
   Future<List<Movie>> seriesData() async {
     final results = await _tmdbService.fetchMovies();
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
               SizedBox(
-              height: MediaQuery.of(context).size.height * 0.5625,
+              // height: MediaQuery.of(context).size.height * 0.5625,
               child: CustomCarouselSlider(
               series: carousel,
               ),

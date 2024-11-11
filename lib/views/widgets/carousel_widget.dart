@@ -35,7 +35,7 @@ class CustomCarouselSlider extends StatelessWidget {
                     Expanded(
                       child: CachedNetworkImage(
                         imageUrl: "https://image.tmdb.org/t/p/w500${data[index].posterPath}",
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                         errorWidget: (context, url, error) => const Icon(Icons.error),
                       ),
                     ),
@@ -54,12 +54,13 @@ class CustomCarouselSlider extends StatelessWidget {
                 );
               },
               options: CarouselOptions(
-                height: double.infinity,
+                height: 300,
                 autoPlay: true,
                 enlargeCenterPage: true,
                 viewportFraction: 0.8, // Adjust this to control poster width
-                aspectRatio: 2.0,     // Keeps the posters proportional
+                // aspectRatio: 1,     // Keeps the posters proportional
                 // enlargeStrategy: CenterPageEnlargeStrategy.width, // Enlarge posters by height
+
               ),
             );
           }

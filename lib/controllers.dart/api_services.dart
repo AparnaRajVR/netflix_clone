@@ -7,7 +7,7 @@ class TMDBService {
   final String apiKey = '3fe7e49fe7b38a9f4f146b33f6ed56d4';
   final String baseUrl = 'https://api.themoviedb.org/3';
 
-  // Helper function for GET requests
+  
   Future<dynamic> _get(String path) async {
     final uri = Uri.parse('$baseUrl$path?api_key=$apiKey');
     final response = await http.get(uri);
@@ -59,12 +59,12 @@ class TMDBService {
     return data['results'];
   }
 
-  // Fetch movie details by movie ID
+ 
   Future<Map<String, dynamic>> fetchMovieDetails(int movieId) async {
     return await _get('/movie/$movieId');
   }
 
-  // Add searchMovie function to search for movies by query
+  
   Future<List<dynamic>> searchMovies(String query) async {
     final data = await _get('/search/movie?query=$query');
     return data['results'];

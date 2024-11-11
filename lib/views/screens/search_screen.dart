@@ -57,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen> {
       return;
     }
 
-    _debounceTimer = Timer(const Duration(milliseconds: 900), () {
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
       setState(() {
         isLoading = true;
         filteredTrendingMovies = trendingMovies
